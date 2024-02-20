@@ -25,6 +25,6 @@
   <div class="actions my-4">
     <%= form.submit class: 'btn btn-primary' %>
   </div>
-  <%= link_to "Cancel", user_path(@info.user), data: { turbo_frame: "user-info" } %>
+  <%= link_to "Cancel", user_path(@info.user), data: { turbo_frame: "user-info" }, class: "btn btn-primary" %>
    
 <% end %>

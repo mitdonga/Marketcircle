@@ -57,11 +57,18 @@ class UsersController < ApplicationController
 
   # DELETE /users/:id
   def destroy
+    user = @user
     @user.destroy
 
     respond_to do |format|
       format.html { redirect_to users_url, notice: "User was successfully destroyed." }
       format.json { render json: { message: "User was successfully deleted" }, status: :ok }
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.update("user-info", ""),
+          turbo_stream.remove(user)
+        ]
+      end
     end
   end
 
