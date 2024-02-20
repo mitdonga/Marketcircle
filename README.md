@@ -49,11 +49,6 @@ Setup database
   rails db:seed
 ```
 
-Run bundle install
-
-```bash
-  bundle install
-```
 
 Start the Rails Server
 
