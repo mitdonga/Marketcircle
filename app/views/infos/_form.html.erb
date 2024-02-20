@@ -1,3 +1,7 @@
+<% if @info.user.present? %>
+  <h4><%= @info.user&.name %> Info<h4>
+<% end %>
+
 <%= form_with(model: @info, local: true) do |form| %>
   <div class="field">
     <%= form.label :title %>

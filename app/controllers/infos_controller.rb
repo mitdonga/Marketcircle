@@ -56,10 +56,11 @@ class InfosController < ApplicationController
 
   # DELETE /infos/1 or /infos/1.json
   def destroy
+    user = @info.user
     @info.destroy
 
     respond_to do |format|
-      format.html { redirect_to infos_url, notice: "Info was successfully destroyed" }
+      format.html { redirect_to user_path(user), notice: "Info was successfully destroyed" }
       format.json { render json: { message: "Info was successfully deleted" }, status: :ok }
     end
   end
