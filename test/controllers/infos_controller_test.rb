@@ -8,7 +8,6 @@ class InfosControllerTest < ActionDispatch::IntegrationTest
 
   test "should get index" do
     get "/infos.json"
-    json_response = JSON.parse(response.body)
 
     assert_response :ok
     assert_equal Info.count, json_response["total_infos"]
@@ -21,7 +20,6 @@ class InfosControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Info.count") do
       post "/infos.json", params: { info: { age: @info.age, email: @info.email, phone: @info.phone, title: @info.title, user_id: @user.id } }
     end
-    json_response = JSON.parse(response.body)
 
     assert_response :created
     assert_equal json_response["title"], @info.title
@@ -33,7 +31,6 @@ class InfosControllerTest < ActionDispatch::IntegrationTest
 
   test "should not create info" do
     post "/infos.json", params: { info: { age: @info.age, email: "wrong@email", phone: @info.phone, title: @info.title, user_id: @user.id } }
-    json_response = JSON.parse(response.body)
 
     assert_response :unprocessable_entity
     assert_includes json_response["errors"], "Email is invalid"
@@ -41,7 +38,6 @@ class InfosControllerTest < ActionDispatch::IntegrationTest
 
   test "should show info" do
     get "/infos/#{@info.id}.json"
-    json_response = JSON.parse(response.body)
 
     assert_response :ok
     assert_equal json_response["title"], @info.title
@@ -54,14 +50,12 @@ class InfosControllerTest < ActionDispatch::IntegrationTest
   test "should show not found" do
     get "/infos/1.json"
 
-    json_response = JSON.parse(response.body)
     assert_response :not_found
     assert_equal json_response["message"], "Info not found"
   end
 
   test "should update info" do
     put "/infos/#{@info.id}.json", params: { info: { title: "MR.", age: 30, email: "testmail@example.com" } }
-    json_response = JSON.parse(response.body)
 
     assert_response :ok
     assert_equal json_response["title"], "MR."
@@ -73,9 +67,14 @@ class InfosControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Info.count", -1) do
       delete "/infos/#{@info.id}.json"
     end
-    json_response = JSON.parse(response.body)
 
     assert_response :ok
     assert_equal json_response["message"], "Info was successfully deleted"
+  end
+
+  private
+
+  def json_response
+    JSON.parse(response.body)
   end
 end

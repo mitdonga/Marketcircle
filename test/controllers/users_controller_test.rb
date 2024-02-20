@@ -7,7 +7,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should get index" do
     get "/users.json"
-    json_response = JSON.parse(response.body)
 
     assert_response :ok
     assert_equal User.count, json_response["total_users"]
@@ -20,7 +19,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_difference("User.count") do
       post "/users.json", params: { user: { name: @user.name } }
     end
-    json_response = JSON.parse(response.body)
 
     assert_response :created
     assert_equal json_response["name"], @user.name
@@ -28,7 +26,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should not create user" do
     post "/users.json", params: { user: { name: "" } }
-    json_response = JSON.parse(response.body)
 
     assert_response :unprocessable_entity
     assert_includes json_response["errors"], "Name can't be blank"
@@ -36,7 +33,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should show user" do
     get "/users/#{@user.id}.json"
-    json_response = JSON.parse(response.body)
 
     assert_response :ok
     assert_equal json_response["name"], @user.name
@@ -44,7 +40,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should update user" do
     put "/users/#{@user.id}.json", params: { user: { name: "Meet Donga" } }
-    json_response = JSON.parse(response.body)
 
     assert_response :ok
     assert_equal json_response["name"], "Meet Donga"
@@ -54,9 +49,14 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_difference("User.count", -1) do
       delete "/users/#{@user.id}.json"
     end
-    json_response = JSON.parse(response.body)
 
     assert_response :ok
     assert_equal json_response["message"], "User was successfully deleted"
+  end
+
+  private
+
+  def json_response
+    JSON.parse(response.body)
   end
 end
