@@ -32,7 +32,7 @@ class InfosController < ApplicationController
         format.json { render :show, status: :created, location: @info }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @info.errors, status: :unprocessable_entity }
+        format.json { render json: { errors: @info.errors.full_messages }, status: :unprocessable_entity }
       end
     end
   end
@@ -45,7 +45,7 @@ class InfosController < ApplicationController
         format.json { render :show, status: :ok, location: @info }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @info.errors, status: :unprocessable_entity }
+        format.json { render json: { errors: @info.errors.full_messages }, status: :unprocessable_entity }
       end
     end
   end

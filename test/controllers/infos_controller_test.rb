@@ -31,6 +31,14 @@ class InfosControllerTest < ActionDispatch::IntegrationTest
     assert_equal json_response["user"]["name"], @user.name
   end
 
+  test "should not create info" do
+    post "/infos.json", params: { info: { age: @info.age, email: "wrong@email", phone: @info.phone, title: @info.title, user_id: @user.id } }
+    json_response = JSON.parse(response.body)
+
+    assert_response :unprocessable_entity
+    assert_includes json_response["errors"], "Email is invalid"
+  end
+
   test "should show info" do
     get "/infos/#{@info.id}.json"
     json_response = JSON.parse(response.body)

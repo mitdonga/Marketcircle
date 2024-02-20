@@ -26,6 +26,14 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_equal json_response["name"], @user.name
   end
 
+  test "should not create user" do
+    post "/users.json", params: { user: { name: "" } }
+    json_response = JSON.parse(response.body)
+
+    assert_response :unprocessable_entity
+    assert_includes json_response["errors"], "Name can't be blank"
+  end
+
   test "should show user" do
     get "/users/#{@user.id}.json"
     json_response = JSON.parse(response.body)
