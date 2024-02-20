@@ -10,12 +10,12 @@ class UsersController < ApplicationController
 
   # GET /users/:id
   def show
-    @info = @user.info
   end
 
   # GET /users/new
   def new
     @user = User.new
+    @user.build_info
   end
 
   # GET /users/1/edit
@@ -29,6 +29,12 @@ class UsersController < ApplicationController
       if @user.save
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.prepend("users_list", partial: "users/user_list", locals: { user: @user }),
+            turbo_stream.replace("user-info", template: "users/show", locals: { user: @user })
+          ]
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity }

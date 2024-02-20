@@ -2,6 +2,7 @@
 <%= turbo_frame_tag "user-info" do %>
   <h4><%= @user.name %><h4>
   <br>
+  <% @info = @user.info %>
   <% if @info.present? %>
     <p><strong>Title:</strong> <%= @info.title %></p>
     <p><strong>Age:</strong> <%= @info.age %></p>
