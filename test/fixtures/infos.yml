@@ -1,0 +1,50 @@
+one:
+  title: Mr.
+  age: 1
+  phone: "123-456-7890"
+  email: "rahula@yopmail.com"
+  user: one
+
+two:
+  title: Miss
+  age: 1
+  phone: "103-456-9890"
+  email: angela@yopmail.com
+  user: two
+
+three:
+  title: Mrs.
+  age: 30
+  phone: "987-654-3210"
+  email: "john@example.com"
+  user: three
+
+four:
+  title: Dr.
+  age: 45
+  phone: "555-555-5555"
+  email: "jane@example.com"
+  user: four
+
+five:
+  title: Miss
+  age: 25
+  phone: "555-123-4567"
+  email: "mary@example.com"
+  user: five
+
+six:
+  title: Mr.
+  age: 40
+  phone: "789-456-1230"
+  email: "peter@example.com"
+  user: six
+
+seven:
+  title: Dr.
+  age: 35
+  phone: "111-222-3333"
+  email: "david@example.com"
+  user: seven
+
+
