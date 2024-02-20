@@ -1,0 +1,26 @@
+<%= form_with(model: @info, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div class="field">
+    <%= form.label :age %>
+    <%= form.number_field :age %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :user_id, value: params[:user_id] %>
+  </div>
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+  <%= link_to "Cancel", user_path(@info.user), data: { turbo_frame: "user-info" } %>
+   
+<% end %>

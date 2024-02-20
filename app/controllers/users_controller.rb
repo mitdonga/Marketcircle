@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   # GET /users/:id
   def show
+    @info = @user.info
   end
 
   # GET /users/new

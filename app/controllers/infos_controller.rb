@@ -16,6 +16,10 @@ class InfosController < ApplicationController
   # GET /infos/new
   def new
     @info = Info.new
+    if params[:user_id].present?
+      @user = User.find_by(id: params[:user_id])
+      @info.user = @user if @user.present?
+    end
   end
 
   # GET /infos/1/edit

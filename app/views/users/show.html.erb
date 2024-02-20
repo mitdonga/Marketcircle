@@ -1,0 +1,19 @@
+<h1>User Details</h1>
+<%= turbo_frame_tag "user-info" do %>
+  <h4><%= @user.name %><h4>
+  <br>
+  <% if @info.present? %>
+    <p><strong>Title:</strong> <%= @info.title %></p>
+    <p><strong>Age:</strong> <%= @info.age %></p>
+    <p><strong>Phone:</strong> <%= @info.phone %></p>
+    <p><strong>Email:</strong> <%= @info.email %></p>
+
+    <p>
+      <%= link_to "Edit", edit_info_path(@info), data: { turbo_frame: "user-info" }  %> | 
+      <%= link_to "Delete", @info, data: { turbo_method: :delete } %>
+    </p>
+  <% else %>
+    <h4>Info Not Present<h4>
+    <%= link_to "Add Info", new_info_path(user_id: @user.id), data: { turbo_frame: "user-info" } %>
+  <% end %>
+<% end %>
